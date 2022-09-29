@@ -22,9 +22,11 @@ const getContactById = async (contactId) => {
 const removeContact = async (contactId) => {
     const contactList = await listContacts()
     const index = contactList.findIndex(({ id }) => id === contactId)
+
     if (index === -1) {
         return null
     }
+    
     const removedContact = contactList.splice(index, 1)
     rewriteContacts(contactList)
     return removedContact
@@ -35,6 +37,7 @@ const addContact = async (data) => {
         id: uuidv4(),
         ...data
     }
+
     const contactList = await listContacts()
     contactList.push(contact)
     rewriteContacts(contactList)
